@@ -1,0 +1,3501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Side International Academy</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7cf03d;
+            --secondary-color: #d8970a;
+            --dark-color: #222;
+            --light-color: #f9f9f9;
+            --white: #fff;
+            --black: #000;
+            --text-dark: #333;
+            --text-light: #666;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --bg-color: #fff;
+            --text-color: #333;
+            --card-bg: #fff;
+            --nav-bg: rgba(255,255,255,0.95);
+            --nav-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f5f5f5;
+            --card-bg: #1e1e1e;
+            --nav-bg: rgba(30,30,30,0.95);
+            --nav-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            --light-color: #2d2d2d;
+            --text-dark: #f5f5f5;
+            --text-light: #aaa;
+            --shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--nav-bg);
+            box-shadow: var(--nav-shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: rotate(15deg);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: var(--transition);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            z-index: 1000;
+            margin-right: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        /* Modern Language Selector */
+        .language-selector-container {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .language-selector-button {
+            display: flex;
+            align-items: center;
+            background: rgba(124, 240, 61, 0.1);
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .language-selector-button:hover {
+            background: rgba(124, 240, 61, 0.2);
+        }
+
+        .language-selector-button i {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .language-selector-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 0.5rem 0;
+            min-width: 150px;
+            display: none;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .language-selector-container:hover .language-selector-dropdown,
+        .language-selector-dropdown:hover {
+            display: block;
+        }
+
+        .language-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .language-option:hover {
+            background: rgba(124, 240, 61, 0.1);
+            color: var(--primary-color);
+        }
+
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 0.5rem;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+
+        .language-option .check-icon {
+            color: var(--primary-color);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .language-option.selected .check-icon {
+            opacity: 1;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(124, 240, 61, 0.1);
+        }
+        
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .hero img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            animation: zoomInOut 20s infinite alternate;
+        }
+
+        @keyframes zoomInOut {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-logo {
+            width: 10px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--white);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-btn.primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 240, 61, 0.4);
+        }
+
+        .hero-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(124, 240, 61, 0.6);
+        }
+
+        .hero-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .hero-btn.secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        /* Achievement Section */
+        .achievements {
+            padding: 4rem 2rem;
+            background: var(--light-color);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .achievement-card h3 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .achievement-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .section-description {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card::after {
+            
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: rgba(124, 240, 61, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--gradient);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .feature-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .feature-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(124, 240, 61, 0.4);
+        }
+
+        .feature-link:hover::before {
+            width: 100%;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 4rem 2rem;
+            background: var(--light-color);
+        }
+
+        .events-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .slide.active .slide-content {
+            transform: translateY(0);
+        }
+
+        .slide-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .slide-content p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .slide-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .slide-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+        }
+
+        .slider-nav button {
+            background: rgba(255,255,255,0.3);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-nav button:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Schedule Section */
+        .schedule {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .schedule-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .calendar-preview, .upcoming-events {
+            flex: 1;
+            min-width: 300px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .calendar-preview:hover, .upcoming-events:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .calendar-header h3 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .calendar-day:first-child {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .event-day {
+            background: rgba(124, 240, 61, 0.2);
+            color: var(--primary-color);
+            font-weight: bold;
+            position: relative;
+        }
+
+        .event-day::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .today {
+            background: var(--gradient);
+            color: white;
+            font-weight: bold;
+        }
+
+        .view-btn {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .view-btn:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .upcoming-events h3 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .event-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .event-item:hover {
+            transform: translateX(5px);
+        }
+
+        .event-time {
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 70px;
+        }
+
+        .event-details h4 {
+            margin-bottom: 0.3rem;
+            color: var(--text-color);
+        }
+
+        .event-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Academic Calendar Styles */
+        .academic-calendar {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-nav button {
+            background: var(--gradient);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .calendar-nav button:hover {
+            transform: scale(1.1);
+        }
+
+        .calendar-month {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day-cell {
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .calendar-day-cell:hover {
+            background: rgba(124, 240, 61, 0.1);
+        }
+
+        .calendar-day-cell.today {
+            background: var(--gradient);
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day-cell.event {
+            position: relative;
+        }
+
+        .calendar-day-cell.event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .calendar-day-cell.other-month {
+            color: var(--text-light);
+            opacity: 0.6;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 4rem 2rem;
+            background: var(--light-color);
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            transition: var(--transition);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(124, 240, 61, 0.4);
+        }
+
+        .view-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(124, 240, 61, 0.6);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+
+        .testimonial {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin: 0 1rem;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(124, 240, 61, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .author-info h4 {
+            color: var(--text-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+ /* Modern Calendar Section */
+        .calendar-section {
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            text-align: center;
+        }
+        
+        .calendar-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .calendar-preview {
+            flex: 1;
+            min-width: 300px;
+            background: var(--bg-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calendar-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .calendar-preview:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(124, 240, 61, 0.2);
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .calendar-nav button {
+            background: var(--primary-light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .calendar-nav button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .calendar-month {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .calendar-day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .calendar-day-cell:hover {
+            background: rgba(124, 240, 61, 0.1);
+        }
+        
+        .calendar-day-cell.today {
+            background: var(--gradient);
+            color: white;
+            font-weight: bold;
+            transform: scale(1.1);
+        }
+        
+        .calendar-day-cell.event {
+            position: relative;
+        }
+        
+        .calendar-day-cell.event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+        
+        .calendar-day-cell.today.event::after {
+            background: white;
+        }
+        
+        .calendar-day-cell.other-month {
+            color: var(--text-light);
+            opacity: 0.5;
+        }
+        
+        .events-sidebar {
+            flex: 1;
+            min-width: 300px;
+            background: var(--bg-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .events-sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .events-sidebar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .events-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(124, 240, 61, 0.2);
+            text-align: center;
+        }
+        
+        .selected-date {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .event-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        
+        .event-item {
+            background: var(--primary-light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .event-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .event-time {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .event-time i {
+            font-size: 0.9rem;
+        }
+        
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .event-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        .no-events {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+        }
+        
+        .view-calendar-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(124, 240, 61, 0.4);
+        }
+        
+        .view-calendar-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(124, 240, 61, 0.6);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .calendar-container {
+                flex-direction: column;
+            }
+            
+            .calendar-preview, .events-sidebar {
+                min-width: 100%;
+            }
+            
+            .calendar-day-cell {
+                padding: 0.3rem;
+                font-size: 0.9rem;
+            }
+        }
+        /* Contact CTA */
+        .contact-cta {
+            padding: 5rem 2rem;
+            background: var(--gradient);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .contact-cta::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            width: 100%;
+        }
+
+        .cta-button.phone {
+            background: var(--white);
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-button.phone:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .cta-button.email {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .cta-button.email:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 4rem 2rem;
+            background: var(--light-color);
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(124, 240, 61, 0.2);
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(124, 240, 61, 0.4);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(124, 240, 61, 0.6);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding-top: 4rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-section.creator-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .footer-section.creator-info .read-me-btn {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .footer-logo {
+            height: 60px;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-logo:hover {
+            transform: rotate(5deg);
+        }
+
+        .footer-section {
+            padding: 1rem;
+        }
+
+        .footer-section.about p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-section.links ul {
+            list-style: none;
+        }
+
+        .footer-section.links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section.links a {
+            opacity: 0.8;
+            transition: var(--transition);
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-section.links a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(124, 240, 61, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(124, 240, 61, 0.6);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .modal-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .creator-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .creator-social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .creator-social-links a {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(216, 151, 10, 0.1);
+        }
+
+        .creator-social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            background: rgba(124, 240, 61, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 0;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--card-bg);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 999;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 8rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .profile-container {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .language-selector-container {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+            }
+        }
+
+        /* Large screen (TV) styles */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero h2 {
+                font-size: 4rem;
+            }
+            
+            .hero p {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .section-description {
+                font-size: 1.3rem;
+                max-width: 900px;
+            }
+            
+            .features-grid {
+                max-width: 1300px;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+            
+            .feature-card {
+                padding: 3rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.6rem;
+            }
+            
+            .feature-card p {
+                font-size: 1.1rem;
+            }
+            
+            .events-slider {
+                max-width: 1300px;
+            }
+            
+            .slide img {
+                height: 500px;
+            }
+            
+            .slide-content h3 {
+                font-size: 2.2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-grid {
+                max-width: 1500px;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .gallery-item {
+                height: 300px;
+            }
+            
+            .testimonials-slider {
+                max-width: 1000px;
+            }
+            
+            .testimonial-content {
+                font-size: 1.2rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 3rem;
+            }
+            
+            .cta-content p {
+                font-size: 1.4rem;
+            }
+            
+            .footer-content {
+                max-width: 1400px;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .slide-up {
+            animation: slideUp 1s ease-out;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* New Animations */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .rotate {
+            animation: rotate 15s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes shake {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(124, 240, 61, 0.5); }
+            to { box-shadow: 0 0 20px rgba(124, 240, 61, 0.8); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <div class="header-wrapper">
+        <div class="container">
+            <header>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-times" style="display: none;"></i>
+                </button>
+                <a href="#home" class="logo">
+                    <img src="logo.png" alt="Bright Side International School Logo">
+                    <h1>Bright Side</h1>
+                </a>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#home" class="nav-link active" data-translate="nav.home">Home</a></li>
+                        <li><a href="#features" class="nav-link" data-translate="nav.features">Features</a></li>
+                        <li><a href="#gallery" class="nav-link" data-translate="nav.gallery">Gallery</a></li>
+                        <li><a href="#events" class="nav-link" data-translate="nav.schedule">Events</a></li>
+                        <li><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li>
+                        <!-- Modern Language Selector -->
+                <div class="language-selector-container">
+                    <button class="language-selector-button">
+                        <i class="fas fa-globe"></i>
+                        <span id="current-language">English</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-selector-dropdown">
+                        <div class="language-option selected" data-lang="en">
+                            <span>
+                                <img src="https://flagcdn.com/w20/gb.png" class="language-flag" alt="English">
+                                English
+                            </span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="am">
+                            <span>
+                                <img src="https://flagcdn.com/w20/et.png" class="language-flag" alt="Amharic">
+                                አማርኛ
+                            </span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="om">
+                            <span>
+                                <img src="https://flagcdn.com/w20/et.png" class="language-flag" alt="Oromo">
+                                Afaan Oromoo
+                            </span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="ar">
+                            <span>
+                                <img src="https://flagcdn.com/w20/sa.png" class="language-flag" alt="Arabic">
+                                العربية
+                            </span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <li>
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <img src="photo_2025-02-19_09-37-14.jpg" alt="School Campus">
+            <div class="hero-content">
+                <h2 class="slide-up" data-translate="hero.title">Bright Side International Academy</h2>
+                <p class="slide-up delay-1" data-translate="hero.subtitle">Shaping Future Leaders Through Quality Education</p>
+                <div class="hero-buttons slide-up delay-2">
+                    <a href="login.html" class="hero-btn primary pulse" data-translate="hero.enroll_button">Get started</a>
+                </div>
+            </div>
+            <a href="#features" class="scroll-down">
+                <i class="fas fa-chevron-down float"></i>
+            </a>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <h2 class="section-title fade-in" data-translate="features.title">Our <span data-translate="features.title_highlight">Key Features</span></h2>
+            <p class="section-description fade-in" data-translate="features.description">Access important school resources with just one click</p>
+            
+            <div class="features-grid">
+                <div class="feature-card slide-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 data-translate="features.communication.title">Direct Parent Communication</h3>
+                    <p data-translate="features.communication.description">Connect with teachers and administrators through our secure messaging portal</p>
+                    <a href="#home" class="feature-link glow" data-translate="features.communication.button">Access Portal</a>
+                </div>
+                
+                <div class="feature-card slide-up delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 data-translate="features.resources.title">Digital Learning Resources</h3>
+                    <p data-translate="features.resources.description">Access to online textbooks, assignments, and learning materials anytime</p>
+                    <a href="login.php" class="feature-link glow" data-translate="features.resources.button">View Resources</a>
+                </div>
+                
+                <div class="feature-card slide-up delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 data-translate="features.progress.title">Interactive Event Calendar</h3>
+                    <p data-translate="features.progress.description">Stay updated with all school activities, exams, and important dates</p>
+                    <a href="#calander" class="feature-link glow" data-translate="features.progress.button">Check Activities</a>
+                </div>
+            </div>
+        </section>
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery">
+            <h2 class="section-title fade-in" data-translate="gallery.title">School <span data-translate="gallery.title_highlight">Gallery</span></h2>
+            <p class="section-description fade-in" data-translate="gallery.description">Explore moments from our vibrant school community</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item slide-up">
+                    <img src="image/PhotoGrid_1548347364085.jpg" alt="Science Fair">
+                    <div class="gallery-overlay">
+                        <h3 data-translate="gallery.science_fair">Science Fair 2023</h3>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up delay-1">
+                    <img src="image/photo_2023-06-02_18-17-15.jpg" alt="Sports Day">
+                    <div class="gallery-overlay">
+                        <h3 data-translate="gallery.sports_day">Annual Sports Day</h3>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up delay-2">
+                    <img src="image/we.jpg" alt="Cultural Festival">
+                    <div class="gallery-overlay">
+                        <h3 data-translate="gallery.cultural_festival">Cultural Festival</h3>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up delay-2">
+                    <img src="image/or.jpg" alt="Cultural Festival">
+                    <div class="gallery-overlay">
+                        <h3 data-translate="gallery.cultural_festival">Cultural Festival</h3>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up delay-2">
+                    <img src="image/90.jpg" alt="Cultural Festival">
+                    <div class="gallery-overlay">
+                        <h3 data-translate="gallery.cultural_festival">Cultural Festival</h3>
+                    </div>
+                </div>
+                <div class="gallery-item slide-up delay-2">
+                    <img src="image/gu.jpg" alt="Cultural Festival">
+                    <div class="gallery-overlay">
+                        <h3 data-translate="gallery.cultural_festival">Cultural Festival</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- Events Section -->
+                <section id="events" class="events">
+                    <h2 class="section-title fade-in" data-translate="events.title">School <span data-translate="events.title_highlight">Events</span></h2>
+                    <p class="section-description fade-in" data-translate="events.description">Stay updated with all our upcoming activities and programs</p>
+                    
+                    <div class="events-slider fade-in">
+                        <div class="slides">
+                            <div class="slide active">
+                                <img src="image/photo_2023-07-08_14-12-42.jpg" alt="Science Fair">
+                                <div class="slide-content">
+                                    <h3 data-translate="events.science_fair.title">Annual Meating</h3>
+                                    <p data-translate="events.science_fair.description">Annual science exhibition showcasing student projects and innovations</p>
+                                    <button class="slide-btn pulse" data-translate="events.learn_more">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="image/2024-04-11.jpg" alt="Sports Day">
+                                <div class="slide-content">
+                                    <h3 data-translate="events.sports_day.title">Black & white Day</h3>
+                                    <p data-translate="events.sports_day.description">Inter-house competitions and athletic events for all grades</p>
+                                    <button class="slide-btn pulse" data-translate="events.learn_more">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="image/89.jpg" alt="Cultural Festival">
+                                <div class="slide-content">
+                                    <h3 data-translate="events.cultural_festival.title">Cultural Festival</h3>
+                                    <p data-translate="events.cultural_festival.description">Celebration of diversity with performances from different cultures</p>
+                                    <button class="slide-btn pulse" data-translate="events.learn_more">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slider-nav">
+                            <button class="prev"><i class="fas fa-arrow-left"></i></button>
+                            <button class="next"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="slider-dots">
+                            <div class="slider-dot active"></div>
+                            <div class="slider-dot"></div>
+                            <div class="slider-dot"></div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Add this new Calendar Section -->
+    <section id="calander" class="calendar-section">
+        <h2 class="section-title fade-in" data-translate="calendar.title">School <span data-translate="calendar.title_highlight">Calendar</span></h2>
+        <p class="section-description fade-in" data-translate="calendar.description">Stay updated with all important school events and activities</p>
+        
+        <div class="calendar-container">
+            <div class="calendar-preview slide-up">
+                <div class="calendar-header">
+                    <div class="calendar-month">January 2025</div>
+                    <div class="calendar-nav">
+                        <button class="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-day-header" data-translate="weekdays.sun">Sun</div>
+                    <div class="calendar-day-header" data-translate="weekdays.mon">Mon</div>
+                    <div class="calendar-day-header" data-translate="weekdays.tue">Tue</div>
+                    <div class="calendar-day-header" data-translate="weekdays.wed">Wed</div>
+                    <div class="calendar-day-header" data-translate="weekdays.thu">Thu</div>
+                    <div class="calendar-day-header" data-translate="weekdays.fri">Fri</div>
+                    <div class="calendar-day-header" data-translate="weekdays.sat">Sat</div>
+                    
+                    <!-- Calendar days will be dynamically inserted here by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="events-sidebar slide-up delay-1">
+                <h3 class="events-title" data-translate="calendar.events">Today's Events</h3>
+                <div class="selected-date">Monday, January 15, 2025</div>
+                
+                <div class="event-list">
+                    <div class="event-item">
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> 08:00 AM - 10:00 AM
+                        </div>
+                        <h4 class="event-title" data-translate="calendar.event1.title">Parent-Teacher Meeting</h4>
+                        <p class="event-description" data-translate="calendar.event1.description">Quarterly meeting with teachers to discuss student progress and performance.</p>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> 02:00 PM - 04:00 PM
+                        </div>
+                        <h4 class="event-title" data-translate="calendar.event2.title">Science Fair</h4>
+                        <p class="event-description" data-translate="calendar.event2.description">Annual science exhibition showcasing student projects and innovations.</p>
+                    </div>
+                    
+                    <!-- More events can be added here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- Newsletter Section -->
+        <section class="newsletter fade-in">
+            <h2 class="section-title" data-translate="newsletter.title">Subscribe to Our <span data-translate="newsletter.title_highlight">Newsletter</span></h2>
+            <p class="section-description" data-translate="newsletter.description">Stay updated with the latest news and events from our school</p>
+            
+            <form class="newsletter-form slide-up">
+                <input type="email" class="newsletter-input" placeholder="Your email address" data-translate="newsletter.placeholder" required>
+                <button type="submit" class="newsletter-btn pulse" data-translate="newsletter.button">Subscribe</button>
+            </form>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section id="contact" class="contact-cta">
+            <div class="cta-content">
+                <h2 class="fade-in" data-translate="contact.title">Ready to Join Our Community?</h2>
+                <p class="fade-in" data-translate="contact.description">Contact us today to register your child or learn more about our programs</p>
+                <div class="cta-buttons slide-up">
+                    <a href="tel:+251991185321" class="cta-button phone pulse">
+                        <i class="fas fa-phone"></i> <span data-translate="contact.call">Call Us</span>
+                    </a>
+                    <a href="mailto:info@brightside.edu" class="cta-button email pulse">
+                        <i class="fas fa-envelope"></i> <span data-translate="contact.email">Email Us</span>
+                    </a>
+                    <a href="#" class="cta-button email pulse">
+                        <i class="fas fa-map-marker-alt"></i> <span data-translate="contact.visit">Visit Us</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <img src="logo.png" alt="School Logo" class="footer-logo">
+                <p data-translate="footer.about">Bright Side International Academy is committed to providing quality education that nurtures the whole child - academically, socially, and emotionally.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3 data-translate="footer.quick_links">Quick Links</h3>
+                <ul>
+                    <li><a href="#" data-translate="nav.home">Home</a></li>
+                    <li><a href="#features" data-translate="nav.features">Features</a></li>
+                    <li><a href="#gallery" data-translate="nav.gallery">Gallery</a></li>
+                    <li><a href="#events" data-translate="nav.schedule">Events</a></li>
+                    <li><a href="#contact" data-translate="nav.contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact-info">
+                <h3 data-translate="footer.contact_us">Contact Us</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-translate="footer.address">123 Education Ave, Addis Ababa, Ethiopia</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+251 991 185 321</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@brightside.edu</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span data-translate="footer.hours">Mon-Fri: 8:00 AM - 5:00 PM</span>
+                </div>
+            </div>
+            
+            <div class="footer-section creator-info">
+                <h3 data-translate="footer.about_creator">About The Creator</h3>
+                <p data-translate="footer.creator_description">Created by Yafet Tesfaye, a multi-talented student at Bright Side International Academy.</p>
+                <button class="feature-link read-me-btn pulse" style="margin-top: 1rem;" data-translate="footer.read_more">Read More</button>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p data-translate="footer.copyright">&copy; 2025 Bright Side International School. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Creator Modal -->
+    <div class="modal creator-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 data-translate="modal.about_creator">About Yafet Tesfaye</h2>
+            <div class="creator-info">
+                <p data-translate="modal.creator_intro">I'm a multi-talented creative professional currently learning at Bright Side International Academy. As a clever and dedicated student, I've developed expertise in several areas:</p>
+                <ul>
+                    <li><strong data-translate="modal.skill1_title">Graphics Designer:</strong> <span data-translate="modal.skill1_description">Creating visually stunning designs that communicate effectively</span></li>
+                    <li><strong data-translate="modal.skill2_title">Software Developer:</strong> <span data-translate="modal.skill2_description">Building functional and user-friendly applications</span></li>
+                    <li><strong data-translate="modal.skill3_title">Photographer:</strong> <span data-translate="modal.skill3_description">Capturing moments with artistic vision and technical skill</span></li>
+                </ul>
+                
+                <p data-translate="modal.creator_passion">My passion for technology and creativity drives me to constantly learn and innovate. I approach every project with enthusiasm and attention to detail.</p>
+                
+                <h3 data-translate="modal.contact_me">Contact Me</h3>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>yafettesfaye658@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+251 991 185 321</span>
+                </div>
+                
+                <div class="creator-social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Translation dictionary
+        const translations = {
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.features": "Features",
+                "nav.gallery": "Gallery",
+                "nav.schedule": "Schedule",
+                "nav.contact": "Contact",
+                "nav.testimonials": "Testimonials",
+                
+                // Profile
+                "profile.my_profile": "My Profile",
+                "profile.settings": "Profile Settings",
+                "profile.logout": "Logout",
+                
+                // Settings
+                "settings.theme": "Theme",
+                "settings.dark_mode": "Dark Mode",
+                
+                // Hero Section
+                "hero.title": "Bright Side International Academy",
+                "hero.subtitle": "Shaping Future Leaders Through Quality Education",
+                "hero.enroll_button": "Get Started",
+                
+                // Features
+                "features.title": "Our Key Features",
+                "features.description": "Access important school resources with just one click",
+                "features.communication.title": "Direct Parent Communication",
+                "features.communication.description": "Connect with teachers and administrators through our secure messaging portal",
+                "features.communication.button": "Access Portal",
+                "features.resources.title": "Digital Learning Resources",
+                "features.resources.description": "Access to online textbooks, assignments, and learning materials anytime",
+                "features.resources.button": "View Resources",
+                "features.progress.title": "Interactive Event Calendar",
+                "features.progress.description": "Stay updated with all school activities, exams, and important dates",
+                "features.progress.button": "Check Activities",
+                
+                // Events
+                "events.title": "School Events",
+                "events.description": "Stay updated with all our upcoming activities and programs",
+                "events.science_fair.title": "Annual Meeting",
+                "events.science_fair.description": "Annual science exhibition showcasing student projects and innovations",
+                "events.sports_day.title": "Black & White Day",
+                "events.sports_day.description": "Inter-house competitions and athletic events for all grades",
+                "events.cultural_festival.title": "Cultural Festival",
+                "events.cultural_festival.description": "Celebration of diversity with performances from different cultures",
+                "events.learn_more": "Learn More",
+                
+                // Gallery
+                "gallery.title": "School Gallery",
+                "gallery.description": "Explore moments from our vibrant school community",
+                "gallery.science_fair": "Science Fair 2023",
+                "gallery.sports_day": "Annual Sports Day",
+                "gallery.cultural_festival": "Cultural Festival",
+                "gallery.view_more": "View More Photos",
+                
+                // Calendar
+                "calendar.title": "School Calendar",
+                "calendar.description": "Stay updated with all important school events and activities",
+                "calendar.events": "Today's Events",
+                "calendar.event1.title": "Parent-Teacher Meeting",
+                "calendar.event1.description": "Quarterly meeting with teachers to discuss student progress and performance.",
+                "calendar.event2.title": "Science Fair",
+                "calendar.event2.description": "Annual science exhibition showcasing student projects and innovations.",
+                "calendar.view_full": "View Full Calendar",
+                "calendar.no_events": "No events scheduled",
+                
+                // Weekdays
+                "weekdays.sun": "Sun",
+                "weekdays.mon": "Mon",
+                "weekdays.tue": "Tue",
+                "weekdays.wed": "Wed",
+                "weekdays.thu": "Thu",
+                "weekdays.fri": "Fri",
+                "weekdays.sat": "Sat",
+                
+                // Newsletter
+                "newsletter.title": "Subscribe to Our Newsletter",
+                "newsletter.description": "Stay updated with the latest news and events from our school",
+                "newsletter.placeholder": "Your email address",
+                "newsletter.button": "Subscribe",
+                
+                // Contact
+                "contact.title": "Ready to Join Our Community?",
+                "contact.description": "Contact us today to register your child or learn more about our programs",
+                "contact.call": "Call Us",
+                "contact.email": "Email Us",
+                "contact.visit": "Visit Us",
+                
+                // Footer
+                "footer.about": "Bright Side International Academy is committed to providing quality education that nurtures the whole child - academically, socially, and emotionally.",
+                "footer.quick_links": "Quick Links",
+                "footer.admissions": "Admissions",
+                "footer.academics": "Academics",
+                "footer.contact_us": "Contact Us",
+                "footer.address": "123 Education Ave, Addis Ababa, Ethiopia",
+                "footer.hours": "Mon-Fri: 8:00 AM - 5:00 PM",
+                "footer.about_creator": "About The Creator",
+                "footer.creator_description": "Created by Yafet Tesfaye, a multi-talented student at Bright Side International Academy.",
+                "footer.read_more": "Read More",
+                "footer.copyright": "© 2025 Bright Side International School. All rights reserved.",
+                
+                // Modal
+                "modal.about_creator": "About Yafet Tesfaye",
+                "modal.creator_intro": "I'm a multi-talented creative professional currently learning at Bright Side International Academy. As a clever and dedicated student, I've developed expertise in several areas:",
+                "modal.skill1_title": "Graphics Designer:",
+                "modal.skill1_description": "Creating visually stunning designs that communicate effectively",
+                "modal.skill2_title": "Software Developer:",
+                "modal.skill2_description": "Building functional and user-friendly applications",
+                "modal.skill3_title": "Photographer:",
+                "modal.skill3_description": "Capturing moments with artistic vision and technical skill",
+                "modal.creator_passion": "My passion for technology and creativity drives me to constantly learn and innovate. I approach every project with enthusiasm and attention to detail.",
+                "modal.contact_me": "Contact Me"
+            },
+            am: {
+                // Navigation
+                "nav.home": "መነሻ",
+                "nav.features": "ባህሪያት",
+                "nav.gallery": "ጋሌሪ",
+                "nav.schedule": "ስርዓተ ስራ",
+                "nav.contact": "አድራሻ",
+                "nav.testimonials": "ምስክርነቶች",
+                
+                // Profile
+                "profile.my_profile": "የእኔ መገለጫ",
+                "profile.settings": "የመገለጫ ማስተካከያ",
+                "profile.logout": "ውጣ",
+                
+                // Settings
+                "settings.theme": "ገጽታ",
+                "settings.dark_mode": "ጨለማ ሞድ",
+                
+                // Hero Section
+                "hero.title": "ብራይት ሳይድ ኢንተርናሽናል አካዳሚ",
+                "hero.subtitle": "በብቃት ያለው ትምህርት የወደፊት መሪዎችን በማዘጋጀት",
+                "hero.enroll_button": "ይጀምሩ",
+                
+                // Features
+                "features.title": "የእኛ ዋና ባህሪያት",
+                "features.description": "አስፈላጊ የትምህርት ቤት ሀብቶችን በአንድ ጠቅታ ይድረሱ",
+                "features.communication.title": "ቀጥተኛ የወላጅ ግንኙነት",
+                "features.communication.description": "ከመምህራን እና ከአስተዳዳሪዎች ጋር በደህንነቱ የተጠበቀ መልዕክት ፖርታል ያገናኙ",
+                "features.communication.button": "ፖርታል ይድረሱ",
+                "features.resources.title": "ዲጂታል የትምህርት ሀብቶች",
+                "features.resources.description": "የመስመር ላይ የመማሪያ መጻሕፍት፣ ስራዎች እና የትምህርት ቁሳቁሶች ይድረሱ",
+                "features.resources.button": "ሀብቶችን ይመልከቱ",
+                "features.progress.title": "የሂደት መከታተያ",
+                "features.progress.description": "የልጅዎን የትምህርት አፈፃፀም እና የመገኘት መዝገቦችን ይከታተሉ",
+                "features.progress.button": "ሂደትን ይመልከቱ",
+                
+                // Events
+                "events.title": "የትምህርት ቤት",
+                "events.title_highlight": "ክስተቶች",
+                "events.description": "ከሁሉም የሚመጡ እንቅስቃሴዎቻችን እና ፕሮግራሞች ጋር ዘምኑ",
+                "events.science_fair.title": "የሳይንስ ማሳያ",
+                "events.science_fair.description": "ዓመታዊ የሳይንስ ማሳያ የተማሪ ፕሮጀክቶችን እና ፈጠራዎችን ያሳያል",
+                "events.sports_day.title": "የስፖርት ቀን",
+                "events.sports_day.description": "የቤት ውስጥ ውድድሮች እና የስፖርት ዝግጅቶች ለሁሉም ክፍሎች",
+                "events.cultural_festival.title": "የባህል በዓል",
+                "events.cultural_festival.description": "የተለያዩ ባህሎችን በሚያንፀባርቁ አሳያዎች በማክበር ትውልድ",
+                "events.learn_more": "ተጨማሪ ይወቁ",
+                
+                // Gallery
+                "gallery.title": "የትምህርት ቤት",
+                "gallery.title_highlight": "ጋሌሪ",
+                "gallery.description": "ከተለያዩ የትምህርት ቤታችን ማህበረሰብ የተወሰዱ ምስሎችን ይመልከቱ",
+                "gallery.science_fair": "የሳይንስ ማሳያ 2023",
+                "gallery.sports_day": "ዓመታዊ የስፖርት ቀን",
+                "gallery.cultural_festival": "የባህል በዓል",
+                "gallery.view_more": "ተጨማሪ ፎቶዎችን ይመልከቱ",
+                
+                // Schedule
+                "schedule.title": "የትምህርት",
+                "schedule.title_highlight": "ስርዓተ ስራ",
+                "schedule.description": "ስለ አስፈላጊ ቀኖች እና የመጨረሻ ቀኖች የተመለከተ መረጃ ያግኙ",
+                "schedule.today_events": "የዛሬ ክስተቶች",
+                "schedule.event1.title": "የወላጅ-መምህር ስብሰባ",
+                "schedule.event1.location": "ዋና የስብሰባ አዳራሽ",
+                "schedule.event2.title": "የሳይንስ ክበብ ስብሰባ",
+                "schedule.event2.location": "የሳይንስ ላብራቶሪ 2",
+                "schedule.no_events": "ክስተቶች የሉም",
+                
+                // Weekdays
+                "weekdays.sun": "እሑድ",
+                "weekdays.mon": "ሰኞ",
+                "weekdays.tue": "ማክሰ",
+                "weekdays.wed": "ረቡዕ",
+                "weekdays.thu": "ሐሙስ",
+                "weekdays.fri": "ዓርብ",
+                "weekdays.sat": "ቅዳሜ",
+                
+                // Newsletter
+                "newsletter.title": "ለኛ",
+                "newsletter.title_highlight": "ዜና ደብተር ይመዝገቡ",
+                "newsletter.description": "ከትምህርት ቤታችን የቅርብ ዜናዎችን እና ክስተቶችን ይከታተሉ",
+                "newsletter.placeholder": "የኢሜል አድራሻዎ",
+                "newsletter.button": "ይመዝገቡ",
+                
+                // Contact
+                "contact.title": "ማህበረሰባችንን ለመቀላቀል ዝግጁ ነዎት?",
+                "contact.description": "ልጅዎን ለመመዝገብ ወይም ስለ ፕሮግራሞቻችን ተጨማሪ ለማወቅ ዛሬ ያግኙን",
+                "contact.call": "ይደውሉልን",
+                "contact.email": "ኢሜል ይጻፉልን",
+                "contact.visit": "ይጎብኙን",
+                
+                // Footer
+                "footer.about": "ብራይት ሳይድ ኢንተርናሽናል አካዳሚ ልጆችን በትምህርት፣ ማህበራዊ እና ስነ-ልቦናዊ ሁኔታ ሙሉ በሙሉ የሚያዳብር ጥራት ያለው ትምህርት ለመስጠት ቁርጠኛ ነው።",
+                "footer.quick_links": "ፈጣን አገናኞች",
+                "footer.admissions": "መመዝገቢያ",
+                "footer.academics": "አካዳሚክስ",
+                "footer.contact_us": "ያግኙን",
+                "footer.address": "123 የትምህርት አቨኑ፣ አዲስ አበባ፣ ኢትዮጵያ",
+                "footer.hours": "ሰኞ-ዓርብ፡ 8፡00 ጥዋት - 5፡00 ምሽት",
+                "footer.about_creator": "ስለ ፈጣሪው",
+                "footer.creator_description": "በብራይት ሳይድ ኢንተርናሽናል አካዳሚ የሚማር ብዙ ችሎታ ያለው ተማሪ የሆነው ያፌት ተስፋዬ የፈጠረው።",
+                "footer.read_more": "ተጨማሪ ያንብቡ",
+                "footer.copyright": "© 2025 ብራይት ሳይድ ኢንተርናሽናል ትምህርት ቤት. ሁሉም መብቶች የተጠበቁ ናቸው።",
+                
+                // Modal
+                "modal.about_creator": "ስለ ያፌት ተስፋዬ",
+                "modal.creator_intro": "እኔ በብራይት ሳይድ ኢንተርናሽናል አካዳሚ የምማር ብዙ ችሎታ ያለው ፈጣሪ ባለሙያ ነኝ። እንደ ብልህ እና የተሰማራ ተማሪ በበርካታ ዘርፎች አመቺነት አግኝቻለሁ።",
+                "modal.skill1_title": "ግራፊክስ ዲዛይነር፡",
+                "modal.skill1_description": "በውጤታማነት የሚያነጋግሩ የሚያምሩ ዲዛይኖችን መፍጠር",
+                "modal.skill2_title": "ሶፍትዌር ገንቢ፡",
+                "modal.skill2_description": "ተግባራዊ እና ለተጠቃሚ የሚመች መተግበሪያዎችን መገንባት",
+                "modal.skill3_title": "ፎቶግራፈር፡",
+                "modal.skill3_description": "በአርቲስቲክ ራእይ እና ቴክኒካዊ ክህሎት ምስሎችን መቅረጽ",
+                "modal.creator_passion": "ለቴክኖሎጂ እና ፈጠራ ያለኝ ፍቅር በቋሚነት እንድማር እና አዲስ �ደባባዮችን እንድፈጥር ያደርገኛል። ለእያንዳንዱ ፕሮጀክት በመደሰት እና በዝርዝር ትኩረት እቀርባለሁ።",
+                "modal.contact_me": "ያግኙኝ"
+            },
+            om: {
+                // Navigation
+                "nav.home": "Mana",
+                "nav.features": "Qoodannoo",
+                "nav.gallery": "Suuraawwan",
+                "nav.schedule": "Yeroo",
+                "nav.contact": "Qunnamtii",
+                "nav.testimonials": "Ragaa",
+                
+                // Profile
+                "profile.my_profile": "Seenaa Koo",
+                "profile.settings": "Sirreeffama Seenaa",
+                "profile.logout": "Ba'i",
+                
+                // Settings
+                "settings.theme": "Mala",
+                "settings.dark_mode": "Muka Dukkana",
+                
+                // Hero Section
+                "hero.title": "Akkaadaamiiwwan Biyya Alaa Bright Side",
+                "hero.subtitle": "Hojii Barumsaa Gaarii Waliin Imala Dursaa Ta'uu Barachuu",
+                "hero.enroll_button": "Amma Galmaa'i",
+                
+                // Achievements
+                "achievements.students": "Barattoota Waliigalaa",
+                "achievements.experience": "Waggaa Ogeessa",
+                "achievements.branches": "Mataa Waliigalaa",
+                "achievements.rating": "Giddugalee Qixa",
+                
+                // Features
+                "features.title": "Nu",
+                "features.title_highlight": "Qoodannoo Gurguddoo",
+                "features.description": "Qabeenya barnoota gargaargoo ta'e qofa tapha tokkoon itti argadhu",
+                "features.communication.title": "Qunnamtii Dhalaa Dhalaa",
+                "features.communication.description": "Barreessitootaafi bulchitoota waliin qunnamtii nageenya qabu keessatti walitti dhaabbadhaa",
+                "features.communication.button": "Portaalaa Seenuu",
+                "features.resources.title": "Qabeenya Barumsaa Dijitaalaa",
+                "features.resources.description": "Kitaaba toora internettii, hojiiwwanii fi qopheessitoota barumsaa yeroo kamillee argachuu",
+                "features.resources.button": "Qabeenya Ilaaluu",
+                "features.progress.title": "Hordofii Ijoo",
+                "features.progress.description": "Guddiftoota keessanii fi galii barnootaa fi galmaa'aa argachuu",
+                "features.progress.button": "Ijoo Ilaaluu",
+                
+                // Events
+                "events.title": "Mana Barumsaa",
+                "events.title_highlight": "Dhaggeeffannoo",
+                "events.description": "Dhaggeeffannoo keenyaa fi sagantaan keenyaa waliin walitti makamuu",
+                "events.science_fair.title": "Fair Saayinsii",
+                "events.science_fair.description": "Muuziyamii saayinsii waggaa waggaa barattootaafi qophiiwwanii agarsiisa",
+                "events.sports_day.title": "Guyyaa Sporotii",
+                "events.sports_day.description": "Walii galaa mana manaafi tapha sporotii qophaa'oo sadarkaa hundaaf",
+                "events.cultural_fair.title": "Ayyaana Aadaa",
+                "events.cultural_fair.description": "Ayyaana garaagaraa waliin walitti makamuu",
+                "events.learn_more": "Dabalataan Baradhu",
+                
+                // Gallery
+                "gallery.title": "Mana Barumsaa",
+                "gallery.title_highlight": "Suuraawwan",
+                "gallery.description": "Suuraawwan jireenya mana barumsaa keenyaa irraa ilaaluu",
+                "gallery.science_fair": "Fair Saayinsii 2023",
+                "gallery.sports_day": "Guyyaa Sporotii Waggaa Waggaa",
+                "gallery.cultural_festival": "Ayyaana Aadaa",
+                "gallery.view_more": "Suuraawwan Dabalataan Ilaaluu",
+                
+                // Schedule
+                "schedule.title": "Barumsaa",
+                "schedule.title_highlight": "Yeroo",
+                "schedule.description": "Guyyaa gargaargoo ta'aniifi yeroo xumuraa waliin walitti makamuu",
+                "schedule.today_events": "Dhaggeeffannoo Har'a",
+                "schedule.event1.title": "Walga'ii Jaarsa-Barreessitootaa",
+                "schedule.event1.location": "Hall Walga'ii Guddaa",
+                "schedule.event2.title": "Walga'ii Kilaabii Saayinsii",
+                "schedule.event2.location": "Laaboratorii Saayinsii 2",
+                "schedule.no_events": "Dhaggeeffannoo Hin Jiru",
+                
+                // Weekdays
+                "weekdays.sun": "Dilbata",
+                "weekdays.mon": "Wiixata",
+                "weekdays.tue": "Qibxata",
+                "weekdays.wed": "Roobii",
+                "weekdays.thu": "Kamiisa",
+                "weekdays.fri": "Jimaata",
+                "weekdays.sat": "Sanbata",
+                
+                // Newsletter
+                "newsletter.title": "Nu",
+                "newsletter.title_highlight": "Oduu Dabalataa Galmeessi",
+                "newsletter.description": "Oduu haaraa mana barumsaa keenyaa fi dhaggeeffannoo waliin walitti makamuu",
+                "newsletter.placeholder": "Email Keessan",
+                "newsletter.button": "Galmeessi",
+                
+                // Contact
+                "contact.title": "Gareen Keenyaa Walitti Makamuu Qabdu?",
+                "contact.description": "Har'a nu qunnamaa ilma keessan galmeessuufi sagantaa keenyaa irra caalaa barachuuf",
+                "contact.call": "Nu Bilbilaa",
+                "contact.email": "Nu Email Gochaa",
+                "contact.visit": "Nu Taa'aa",
+                
+                // Footer
+                "footer.about": "Akkaadaamiiwwan Biyya Alaa Bright Side barumsa gaarii ilmaan barachuuf, hawaasaafi qalbii isaanii guutuu ta'uu qopheessuuf qophaa'eera.",
+                "footer.quick_links": "Linkii Dafee",
+                "footer.admissions": "Galmeessuu",
+                "footer.academics": "Barumsaa",
+                "footer.contact_us": "Nu Qunnamaa",
+                "footer.address": "123 Education Ave, Finfinnee, Itoophiyaa",
+                "footer.hours": "Dilbata-Jimaata: 8:00 WD - 5:00 WB",
+                "footer.about_creator": "Waa'ee Uumama",
+                "footer.creator_description": "Yafet Tesfaye jedhamuun barataa akkaadaamiiwwan biyya alaa Bright Side tiin uumame.",
+                "footer.read_more": "Dabalataan Dubbisaa",
+                "footer.copyright": "© 2025 Mana Barumsaa Biyya Alaa Bright Side. Mirga Hundaa Qabadha.",
+                
+                // Modal
+                "modal.about_creator": "Waa'ee Yafet Tesfaye",
+                "modal.creator_intro": "Ani barataa akkaadaamiiwwan biyya alaa Bright Side tiin uumama qabeenya hedduu qabuudha. Akka barataa gorfamaa fi qophaa'aa ta'een qophii hedduu keessatti ogeessa ta'eera.",
+                "modal.skill1_title": "Giraafikii Dizaayinarii:",
+                "modal.skill1_description": "Qopheessitoota bifa gammachuudhaan dubbachuu danda'uun uumuu",
+                "modal.skill2_title": "Sooftiweerii Ijaaruu:",
+                "modal.skill2_description": "Sooftiweerii hojiirra oolchuufi fayyadamaa ta'een ijaaruu",
+                "modal.skill3_title": "Suuraa Kaachuu:",
+                "modal.skill3_description": "Suuraawwan bifa aartistikii fi teknikaalaan kaachuu",
+                "modal.creator_passion": "Gorfama kiyya teknooloojii fi uumama irratti hundaa'eera. Hojii hundaa keessatti gammachuun fi qophaa'ummaan dhaabbadha.",
+                "modal.contact_me": "Na Qunnamaa"
+            },
+            ar: {
+                // Navigation
+                "nav.home": "الرئيسية",
+                "nav.features": "المميزات",
+                "nav.gallery": "المعرض",
+                "nav.schedule": "الجدول",
+                "nav.contact": "اتصل بنا",
+                "nav.testimonials": "الشهادات",
+                
+                // Profile
+                "profile.my_profile": "ملفي",
+                "profile.settings": "إعدادات الملف",
+                "profile.logout": "تسجيل الخروج",
+                
+                // Settings
+                "settings.theme": "المظهر",
+                "settings.dark_mode": "الوضع المظلم",
+                
+                // Hero Section
+                "hero.title": "أكاديمية برايت سايد الدولية",
+                "hero.subtitle": "تشكيل قادة المستقبل من خلال التعليم الجيد",
+                "hero.enroll_button": "سجل الآن",
+                
+                // Achievements
+                "achievements.students": "إجمالي الطلاب",
+                "achievements.experience": "سنوات الخبرة",
+                "achievements.branches": "إجمالي الفروع",
+                "achievements.rating": "متوسط التقييم",
+                
+                // Features
+                "features.title": "مميزاتنا",
+                "features.title_highlight": "الرئيسية",
+                "features.description": "الوصول إلى موارد المدرسة المهمة بنقرة واحدة",
+                "features.communication.title": "اتصال مباشر مع أولياء الأمور",
+                "features.communication.description": "تواصل مع المعلمين والإداريين من خلال بوابة المراسلات الآمنة",
+                "features.communication.button": "الوصول إلى البوابة",
+                "features.resources.title": "موارد التعلم الرقمية",
+                "features.resources.description": "الوصول إلى الكتب المدرسية عبر الإنترنت والواجبات ومواد التعلم في أي وقت",
+                "features.resources.button": "عرض الموارد",
+                "features.progress.title": "تتبع التقدم",
+                "features.progress.description": "مراقبة الأداء الأكاديمي لطفلك وسجلات الحضور",
+                "features.progress.button": "تحقق من التقدم",
+                
+                // Events
+                "events.title": "أحداث",
+                "events.title_highlight": "المدرسة",
+                "events.description": "ابق على اطلاع بجميع أنشطتنا وبرامجنا القادمة",
+                "events.science_fair.title": "معرض العلوم",
+                "events.science_fair.description": "معرض العلوم السنوي يعرض مشاريع الطلاب والابتكارات",
+                "events.sports_day.title": "يوم الرياضة",
+                "events.sports_day.description": "مسابقات بين المنازل وأحداث رياضية لجميع الصفوف",
+                "events.cultural_festival.title": "مهرجان ثقافي",
+                "events.cultural_festival.description": "احتفال بالتنوع مع عروض من ثقافات مختلفة",
+                "events.learn_more": "تعلم المزيد",
+                
+                // Gallery
+                "gallery.title": "معرض",
+                "gallery.title_highlight": "المدرسة",
+                "gallery.description": "استكشف لحظات من مجتمعنا المدرسي النابض بالحياة",
+                "gallery.science_fair": "معرض العلوم 2023",
+                "gallery.sports_day": "يوم الرياضة السنوي",
+                "gallery.cultural_festival": "مهرجان ثقافي",
+                "gallery.view_more": "عرض المزيد من الصور",
+                
+                // Schedule
+                "schedule.title": "الجدول",
+                "schedule.title_highlight": "الأكاديمي",
+                "schedule.description": "ابق على اطلاع بالمواعيد النهائية والتواريخ المهمة",
+                "schedule.today_events": "أحداث اليوم",
+                "schedule.event1.title": "اجتماع أولياء الأمور والمعلمين",
+                "schedule.event1.location": "قاعة المؤتمرات الرئيسية",
+                "schedule.event2.title": "اجتماع نادي العلوم",
+                "schedule.event2.location": "مختبر العلوم 2",
+                "schedule.no_events": "لا توجد أحداث",
+                
+                // Weekdays
+                "weekdays.sun": "الأحد",
+                "weekdays.mon": "الإثنين",
+                "weekdays.tue": "الثلاثاء",
+                "weekdays.wed": "الأربعاء",
+                "weekdays.thu": "الخميس",
+                "weekdays.fri": "الجمعة",
+                "weekdays.sat": "السبت",
+                
+                // Newsletter
+                "newsletter.title": "اشترك في",
+                "newsletter.title_highlight": "نشرتنا الإخبارية",
+                "newsletter.description": "ابق على اطلاع بأحدث الأخبار والأحداث من مدرستنا",
+                "newsletter.placeholder": "عنوان بريدك الإلكتروني",
+                "newsletter.button": "اشتراك",
+                
+                // Contact
+                "contact.title": "هل أنت مستعد للانضمام إلى مجتمعنا؟",
+                "contact.description": "اتصل بنا اليوم لتسجيل طفلك أو لمعرفة المزيد عن برامجنا",
+                "contact.call": "اتصل بنا",
+                "contact.email": "راسلنا",
+                "contact.visit": "زورنا",
+                
+                // Footer
+                "footer.about": "تلتزم أكاديمية برايت سايد الدولية بتقديم تعليم جيد يرعى الطفل ككل - أكاديميًا واجتماعيًا وعاطفيًا.",
+                "footer.quick_links": "روابط سريعة",
+                "footer.admissions": "القبول",
+                "footer.academics": "الأكاديمية",
+                "footer.contact_us": "اتصل بنا",
+                "footer.address": "123 شارع التعليم، أديس أبابا، إثيوبيا",
+                "footer.hours": "من الاثنين إلى الجمعة: 8:00 صباحًا - 5:00 مساءً",
+                "footer.about_creator": "عن المطور",
+                "footer.creator_description": "تم إنشاؤه بواسطة يافيت تيسفاي، طالب متعدد المواهب في أكاديمية برايت سايد الدولية.",
+                "footer.read_more": "اقرأ المزيد",
+                "footer.copyright": "© 2025 أكاديمية برايت سايد الدولية. جميع الحقوق محفوظة.",
+                
+                // Modal
+                "modal.about_creator": "عن يافيت تيسفاي",
+                "modal.creator_intro": "أنا محترف مبدع متعدد المواهب أدرس حاليًا في أكاديمية برايت سايد الدولية. كطالب ذكي ومتفان، طورت خبرة في عدة مجالات:",
+                "modal.skill1_title": "مصمم جرافيك:",
+                "modal.skill1_description": "إنشاء تصاميم مذهلة بصريًا تتواصل بفعالية",
+                "modal.skill2_title": "مطور برمجيات:",
+                "modal.skill2_description": "بناء تطبيقات وظيفية وسهلة الاستخدام",
+                "modal.skill3_title": "مصور:",
+                "modal.skill3_description": "التقاط اللحظات برؤية فنية ومهارة تقنية",
+                "modal.creator_passion": "شغفي بالتكنولوجيا والإبداع يدفعني للتعلم والابتكار باستمرار. أتعامل مع كل مشروع بحماس واهتمام بالتفاصيل.",
+                "modal.contact_me": "اتصل بي"
+            }
+        };
+
+    // DOM elements
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    const dropdownMenu = document.querySelector('.dropdown-content');
+    const backToTop = document.getElementById('backToTop');
+    const languageOptions = document.querySelectorAll('.language-option');
+    const currentLanguage = document.getElementById('current-language');
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+    const readMeBtn = document.querySelector('.read-me-btn');
+    const creatorModal = document.querySelector('.creator-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const slides = document.querySelector('.slides');
+    const slideItems = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    // Calendar elements
+    const calendarGrid = document.querySelector('.calendar-grid');
+    const prevMonthBtn = document.querySelector('.prev-month');
+    const nextMonthBtn = document.querySelector('.next-month');
+    const calendarMonthEl = document.querySelector('.calendar-month');
+    const selectedDateEl = document.querySelector('.selected-date');
+    const eventListEl = document.querySelector('.event-list');
+    
+    // Navigation elements
+    const navLinks = document.querySelectorAll('nav a');
+
+    // Current date and slide variables
+    let currentDate = new Date();
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Toggle mobile menu
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        
+        // Toggle between hamburger and X icons
+        const barsIcon = menuToggle.querySelector('.fa-bars');
+        const timesIcon = menuToggle.querySelector('.fa-times');
+        
+        if (nav.classList.contains('active')) {
+            barsIcon.style.display = 'none';
+            timesIcon.style.display = 'block';
+        } else {
+            barsIcon.style.display = 'block';
+            timesIcon.style.display = 'none';
+        }
+    });
+
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.querySelector('.fa-bars').style.display = 'block';
+                menuToggle.querySelector('.fa-times').style.display = 'none';
+            }
+        });
+    });
+
+
+
+    // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'dark') {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+
+    // Back to top button
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('active');
+        } else {
+            backToTop.classList.remove('active');
+        }
+    });
+
+    backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Language selector functionality
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            currentLanguage.textContent = option.querySelector('span').textContent.trim();
+            
+            // Update selected language in dropdown
+            document.querySelector('.language-option.selected').classList.remove('selected');
+            option.classList.add('selected');
+            
+            // Translate page
+            translatePage(lang);
+            localStorage.setItem('language', lang);
+        });
+    });
+
+    // Translate page function
+    function translatePage(lang) {
+        elementsToTranslate.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang] && translations[lang][key]) {
+                element.textContent = translations[lang][key];
+                
+                // Handle placeholders for input fields
+                if (element.hasAttribute('placeholder')) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            }
+        });
+    }
+
+    // Check for saved language preference
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    const selectedOption = document.querySelector(`.language-option[data-lang="${savedLanguage}"]`);
+    if (selectedOption) {
+        currentLanguage.textContent = selectedOption.querySelector('span').textContent.trim();
+        document.querySelector('.language-option.selected').classList.remove('selected');
+        selectedOption.classList.add('selected');
+        translatePage(savedLanguage);
+    }
+
+    // Creator modal functionality
+    if (readMeBtn) {
+        readMeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            creatorModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            creatorModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close modal when clicking outside
+    if (creatorModal) {
+        creatorModal.addEventListener('click', (e) => {
+            if (e.target === creatorModal) {
+                creatorModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Event slider functionality
+    function showSlide(index) {
+        if (!slides || !slideItems.length) return;
+        
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        
+        // Update dots
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        
+        // Update slide content visibility
+        slideItems.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        if (!slideItems.length) return;
+        currentSlide = (currentSlide + 1) % slideItems.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        if (!slideItems.length) return;
+        currentSlide = (currentSlide - 1 + slideItems.length) % slideItems.length;
+        showSlide(currentSlide);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+
+    // Start auto slide
+    function startSlideShow() {
+        if (slideItems.length) {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+    }
+
+    function stopSlideShow() {
+        clearInterval(slideInterval);
+    }
+
+    // Initialize slider
+    if (slideItems.length) {
+        showSlide(0);
+        startSlideShow();
+
+        // Pause on hover
+        const slider = document.querySelector('.events-slider');
+        if (slider) {
+            slider.addEventListener('mouseenter', stopSlideShow);
+            slider.addEventListener('mouseleave', startSlideShow);
+        }
+    }
+
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Close mobile menu if open
+                if (window.innerWidth <= 768 && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    menuToggle.querySelector('.fa-bars').style.display = 'block';
+                    menuToggle.querySelector('.fa-times').style.display = 'none';
+                }
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Animation on scroll
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.slide-up, .fade-in');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Run once on page load
+
+    // Form submission
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('.newsletter-input');
+            alert(`Thank you for subscribing with ${emailInput.value}!`);
+            emailInput.value = '';
+        });
+    }
+</script>
+<script>
+        // Add these new translations to your existing translations object
+        translations.en.calendar = {
+            "title": "School",
+            "title_highlight": "Calendar",
+            "description": "Stay updated with all important school events and activities",
+            "events": "Today's Events",
+            "event1": {
+                "title": "Parent-Teacher Meeting",
+                "description": "Quarterly meeting with teachers to discuss student progress and performance."
+            },
+            "event2": {
+                "title": "Science Fair",
+                "description": "Annual science exhibition showcasing student projects and innovations."
+            },
+            "view_full": "View Full Calendar"
+        };
+        
+        translations.am.calendar = {
+            "title": "የትምህርት ቤት",
+            "title_highlight": "መዝገበ ቀን",
+            "description": "ከሁሉም አስፈላጊ የትምህርት ቤት ክስተቶች እና እንቅስቃሴዎች ጋር ዘምኑ",
+            "events": "የዛሬ ክስተቶች",
+            "event1": {
+                "title": "የወላጅ-መምህር ስብሰባ",
+                "description": "የሩብ ዓመት ስብሰባ ከመምህራን ጋር የተማሪዎችን እድገት እና አፈፃፀም ለመወያየት።"
+            },
+            "event2": {
+                "title": "የሳይንስ ማሳያ",
+                "description": "ዓመታዊ የሳይንስ ማሳያ የተማሪ ፕሮጀክቶችን እና ፈጠራዎችን ያሳያል።"
+            },
+            "view_full": "ሙሉ መዝገበ ቀን ይመልከቱ"
+        };
+        
+        translations.om.calendar = {
+            "title": "Mana Barumsaa",
+            "title_highlight": "Kalendaarii",
+            "description": "Dhaggeeffannoo gargaargoo mana barumsaa keessaa walitti makamuu",
+            "events": "Dhaggeeffannoo Har'a",
+            "event1": {
+                "title": "Walga'ii Jaarsa-Barreessitootaa",
+                "description": "Walga'ii waggaa waggaa barreessitootaafi jaarsota waliin guddiftoota barachuuf."
+            },
+            "event2": {
+                "title": "Fair Saayinsii",
+                "description": "Muuziyamii saayinsii waggaa waggaa barattootaafi qophiiwwanii agarsiisa."
+            },
+            "view_full": "Kalendaarii Guutuu Ilaaluu"
+        };
+        
+        translations.ar.calendar = {
+            "title": "تقويم",
+            "title_highlight": "المدرسة",
+            "description": "ابق على اطلاع بجميع الأحداث والأنشطة المدرسية المهمة",
+            "events": "أحداث اليوم",
+            "event1": {
+                "title": "اجتماع أولياء الأمور والمعلمين",
+                "description": "اجتماع ربع سنوي مع المعلمين لمناقشة تقدم الطلاب وأدائهم."
+            },
+            "event2": {
+                "title": "معرض العلوم",
+                "description": "معرض العلوم السنوي يعرض مشاريع الطلاب والابتكارات."
+            },
+            "view_full": "عرض التقويم الكامل"
+        };
+
+        // Calendar functionality
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        
+        // Sample events data (in a real app, this would come from your backend)
+        const eventsData = {
+            "2025-08-15": [
+                {
+                    time: "08:00 AM - 10:00 AM",
+                    title: "Parent-Teacher Meeting",
+                    description: "Quarterly meeting with teachers to discuss student progress and performance."
+                },
+                {
+                    time: "02:00 PM - 04:00 PM",
+                    title: "Science Fair",
+                    description: "Annual science exhibition showcasing student projects and innovations."
+                }
+            ],
+            "2025-08-20": [
+                {
+                    time: "09:00 AM - 12:00 PM",
+                    title: "Sports Day",
+                    description: "Annual inter-house sports competition for all grades."
+                }
+            ],
+            "2025-08-25": [
+                {
+                    time: "10:00 AM - 02:00 PM",
+                    title: "Cultural Festival",
+                    description: "Celebration of diversity with performances from different cultures."
+                }
+            ]
+        };
+        
+        function renderCalendar() {
+            // Clear previous days
+            while (calendarGrid.children.length > 7) {
+                calendarGrid.removeChild(calendarGrid.lastChild);
+            }
+            
+            // Update month display
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            calendarMonthEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            
+            // Get first day of month and total days
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+            
+            // Add days from previous month
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day-cell other-month';
+                dayElement.textContent = daysInPrevMonth - i;
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Add days of current month
+            const today = new Date();
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day-cell';
+                dayElement.textContent = i;
+                
+                // Check if this date has events
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                if (eventsData[dateStr]) {
+                    dayElement.classList.add('event');
+                }
+                
+                // Highlight today
+                if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                    dayElement.classList.add('today');
+                    
+                    // Set today's date in the sidebar
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const savedLang = localStorage.getItem('language') || 'en';
+                    selectedDateEl.textContent = new Date(currentYear, currentMonth, i).toLocaleDateString(
+                        savedLang === 'en' ? 'en-US' : 'am-ET', 
+                        options
+                    );
+                    
+                    // Display today's events
+                    displayEvents(dateStr);
+                }
+                
+                // Add click event to show events for this day
+                dayElement.addEventListener('click', () => {
+                    // Remove active class from all days
+                    document.querySelectorAll('.calendar-day-cell').forEach(day => {
+                        day.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked day
+                    dayElement.classList.add('active');
+                    
+                    // Update selected date in sidebar
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const savedLang = localStorage.getItem('language') || 'en';
+                    selectedDateEl.textContent = new Date(currentYear, currentMonth, i).toLocaleDateString(
+                        savedLang === 'en' ? 'en-US' : 'am-ET', 
+                        options
+                    );
+                    
+                    // Display events for this day
+                    displayEvents(dateStr);
+                });
+                
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Add days from next month to fill grid
+            const totalCells = firstDay + daysInMonth;
+            const remainingCells = 42 - totalCells; // 6 rows x 7 days
+            for (let i = 1; i <= remainingCells; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day-cell other-month';
+                dayElement.textContent = i;
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+        
+        function displayEvents(dateStr) {
+            eventListEl.innerHTML = '';
+            
+            if (eventsData[dateStr]) {
+                eventsData[dateStr].forEach(event => {
+                    const eventItem = document.createElement('div');
+                    eventItem.className = 'event-item';
+                    eventItem.innerHTML = `
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> ${event.time}
+                        </div>
+                        <h4 class="event-title">${event.title}</h4>
+                        <p class="event-description">${event.description}</p>
+                    `;
+                    eventListEl.appendChild(eventItem);
+                });
+                
+                // Translate new event items
+                translatePage(localStorage.getItem('language') || 'en');
+            } else {
+                const noEvents = document.createElement('div');
+                noEvents.className = 'no-events';
+                noEvents.innerHTML = `
+                    <h4 data-translate="calendar.no_events">No events scheduled</h4>
+                `;
+                eventListEl.appendChild(noEvents);
+                
+                // Translate no events message
+                translatePage(localStorage.getItem('language') || 'en');
+            }
+        }
+        
+        // Month navigation
+        prevMonthBtn.addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+        
+        nextMonthBtn.addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        });
+        
+        // Initialize calendar
+        renderCalendar();
+        
+        // Add "no_events" translation to all languages
+        translations.en.calendar.no_events = "No events scheduled";
+        translations.am.calendar.no_events = "ምንም ክስተቶች አልተዘጋጁም";
+        translations.om.calendar.no_events = "Dhaggeeffannoo hin jiru";
+        translations.ar.calendar.no_events = "لا توجد أحداث مجدولة";
+    </script>
+</body>
+</html>
